@@ -5,6 +5,6 @@ package repositories
 
 import "github.com/DagmarC/clean-arch-example/cockroach/entities"
 
-type CockroachRepository interface {
+type Cockroach interface {
 	InsertCockroachData(in *entities.InsertCockroachDto) error
 }
