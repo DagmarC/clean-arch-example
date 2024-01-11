@@ -10,20 +10,20 @@ import (
 
 type cockroachImpl struct {
 	cockroachRepository repositories.Cockroach
-	cockroachMessaging repositories.CockroachMessaging
+	cockroachMessaging  repositories.CockroachMessaging
 }
 
 func NewCockroachUsecaseImpl(
 	cockroachRepository repositories.Cockroach,
 	cockroachMessaging repositories.CockroachMessaging,
-) Cockroach {
+) CockroachUsecase {
 	return &cockroachImpl{
 		cockroachRepository: cockroachRepository,
-		cockroachMessaging: cockroachMessaging,
+		cockroachMessaging:  cockroachMessaging,
 	}
 }
 
-func (u *cockroachImpl) Process(in *models.AddCockroachData) error {
+func (u *cockroachImpl) Process(in *models.InsertCockroach) error {
 	cockroachData := &entities.InsertCockroachDto{
 		Amount: in.Amount,
 	}
@@ -32,8 +32,8 @@ func (u *cockroachImpl) Process(in *models.AddCockroachData) error {
 	}
 
 	notification := &entities.CockroachPushNotificationDto{
-		Title: "Cockroach detected!!!",
-		Amount: in.Amount,
+		Title:        "Cockroach detected!!!",
+		Amount:       in.Amount,
 		ReportedTime: time.Now().Format("2006-01-02 15:04:05"),
 	}
 	if err := u.cockroachMessaging.PushNotification(notification); err != nil {

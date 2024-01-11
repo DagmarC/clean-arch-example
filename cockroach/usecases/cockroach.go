@@ -2,6 +2,6 @@ package usecases
 
 import "github.com/DagmarC/clean-arch-example/cockroach/models"
 
-type Cockroach interface {
-	Process(in *models.AddCockroachData) error
+type CockroachUsecase interface {
+	Process(in *models.InsertCockroach) error
 }
