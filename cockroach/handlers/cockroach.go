@@ -1,7 +1,8 @@
 package handlers
 
-import "github.com/labstack/echo"
+import "github.com/labstack/echo/v4"
 
-type Cockroachhandler interface {
+
+type CockroachHandler interface {
 	DetectCockroach(ctx echo.Context) error
 }

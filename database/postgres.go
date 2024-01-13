@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/DagmarC/clean-arch-example/config"
 	"gorm.io/driver/postgres"
@@ -25,8 +26,12 @@ func NewPostgresDatabase(cfg *config.Config) Database {
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect to a database")
+		log.Fatal(err)
 	}
+	if err := db.Exec("SET TIME ZONE 'Europe/Prague'").Error; err != nil {
+		log.Fatal(err)
+	}
+	
 	return &postgresDatabase{Db: db}
 }
 

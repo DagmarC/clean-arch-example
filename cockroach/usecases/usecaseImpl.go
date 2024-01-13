@@ -39,6 +39,6 @@ func (u *cockroachImpl) Process(in *models.InsertCockroach) error {
 	if err := u.cockroachMessaging.PushNotification(notification); err != nil {
 		return err
 	}
-
+	
 	return nil
 }
